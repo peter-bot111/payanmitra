@@ -47,7 +47,39 @@ object DatabasePrepopulator {
             DistrictEntity("TN_CUD", "Cuddalore", "கடலூர்", "कुड्डालोर", "TN", 11.7480, 79.7714),
             DistrictEntity("TN_VLP", "Villupuram", "விழுப்புரம்", "विल्लुपुरम", "TN", 11.9401, 79.4861),
             DistrictEntity("TN_KKI", "Kanyakumari", "கன்னியாகுமரி", "कन्याकुमारी", "TN", 8.0883, 77.5385),
-            DistrictEntity("TN_NIL", "The Nilgiris", "நீலகிரி", "नीलगिरी", "TN", 11.4916, 76.7337)
+            DistrictEntity("TN_NIL", "The Nilgiris", "நீலகிரி", "नीलगिरी", "TN", 11.4916, 76.7337),
+
+            // KARNATAKA
+            DistrictEntity("KA_BLR", "Bengaluru Urban", "பெங்களூரு", "बेंगलुरु", "KA", 12.9716, 77.5946),
+            DistrictEntity("KA_MYS", "Mysuru", "மைசூரு", "मैसूर", "KA", 12.2958, 76.6394),
+            DistrictEntity("KA_MNG", "Mangaluru", "மங்களூரு", "मंगलुरु", "KA", 12.9141, 74.8560),
+            DistrictEntity("KA_HUB", "Hubli-Dharwad", "ஹூப்ளி", "हुबली", "KA", 15.3647, 75.1240),
+            DistrictEntity("KA_BEL", "Belagavi", "பெலகாவி", "बेलगाम", "KA", 15.8497, 74.4977),
+
+            // KERALA
+            DistrictEntity("KL_TVM", "Thiruvananthapuram", "திருவனந்தபுரம்", "तिरुवनंतपुरम", "KL", 8.5241, 76.9366),
+            DistrictEntity("KL_EKM", "Ernakulam / Kochi", "கொச்சி", "एर्णाकुलम", "KL", 9.9312, 76.2673),
+            DistrictEntity("KL_KOZ", "Kozhikode", "கோழிக்கோடு", "कोझिकोड", "KL", 11.2588, 75.7804),
+            DistrictEntity("KL_TCR", "Thrissur", "திருச்சூர்", "त्रिशूर", "KL", 10.5276, 76.2144),
+            DistrictEntity("KL_PKD", "Palakkad", "பாலக்காடு", "पालक्काड", "KL", 10.7867, 76.6548),
+
+            // MAHARASHTRA
+            DistrictEntity("MH_MUM", "Mumbai", "மும்பை", "मुंबई", "MH", 18.9388, 72.8355),
+            DistrictEntity("MH_PUN", "Pune", "புனே", "पुणे", "MH", 18.5204, 73.8567),
+            DistrictEntity("MH_NSK", "Nashik", "நாசிக்", "नाशिक", "MH", 19.9975, 73.7898),
+            DistrictEntity("MH_NGP", "Nagpur", "நாக்பூர்", "नागपुर", "MH", 21.1458, 79.0882),
+
+            // TELANGANA & ANDHRA PRADESH
+            DistrictEntity("TG_HYD", "Hyderabad", "ஹைதராபாத்", "हैदराबाद", "TG", 17.3850, 78.4867),
+            DistrictEntity("TG_WRG", "Warangal", "வாரங்கல்", "वारंगल", "TG", 17.9689, 79.5941),
+            DistrictEntity("AP_VGA", "Vijayawada", "விஜயவாடா", "विजयवाड़ा", "AP", 16.5062, 80.6480),
+
+            // UTTAR PRADESH, DELHI, GUJARAT, RAJASTHAN, GOA
+            DistrictEntity("UP_LKO", "Lucknow", "லக்னோ", "लखनऊ", "UP", 26.8467, 80.9462),
+            DistrictEntity("DL_DEL", "Delhi Central", "டெல்லி", "दिल्ली", "DL", 28.6139, 77.2090),
+            DistrictEntity("GJ_AMD", "Ahmedabad", "அகமதாபாத்", "अहमदाबाद", "GJ", 23.0225, 72.5714),
+            DistrictEntity("RJ_JAI", "Jaipur", "ஜெய்ப்பூர்", "जयपुर", "RJ", 26.9124, 75.7873),
+            DistrictEntity("GA_PAN", "Panaji Goa", "பனாஜி", "पणजी", "GA", 15.4909, 73.8278)
         )
         db.districtDao().insertDistricts(tnDistricts)
 

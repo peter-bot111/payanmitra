@@ -53,6 +53,7 @@ fun BusListScreen(
     onBackClick: () -> Unit,
     onTrackClick: (String) -> Unit,
     onBookClick: (String) -> Unit,
+    onDetailClick: (String) -> Unit = onTrackClick,
     onSOSClick: () -> Unit
 ) {
     val busRoutes by viewModel.busRoutes.collectAsState()
@@ -185,7 +186,8 @@ fun BusListScreen(
                             route = route,
                             availableSeats = 28,
                             onTrackClick = { onTrackClick(route.routeNumber) },
-                            onBookClick = { onBookClick(route.routeNumber) }
+                            onBookClick = { onBookClick(route.routeNumber) },
+                            onDetailClick = { onDetailClick(route.routeNumber) }
                         )
                     }
                 }

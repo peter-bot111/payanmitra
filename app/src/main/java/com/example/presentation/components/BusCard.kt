@@ -41,11 +41,13 @@ fun BusCard(
     availableSeats: Int = 24,
     onTrackClick: () -> Unit,
     onBookClick: () -> Unit,
+    onDetailClick: () -> Unit = onTrackClick,
     modifier: Modifier = Modifier
 ) {
     GlassCard(
         modifier = modifier.fillMaxWidth(),
-        elevation = 6.dp
+        elevation = 6.dp,
+        onClick = onDetailClick
     ) {
         Column {
             Row(

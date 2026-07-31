@@ -89,6 +89,17 @@ sealed class Screen(val route: String, val titleRes: Int? = null, val icon: Imag
     object AreaSelect : Screen("area_select/{districtCode}") {
         fun createRoute(districtCode: String) = "area_select/$districtCode"
     }
+
+    object StateList : Screen("state_list")
+    object DistrictList : Screen("district_list/{stateCode}/{stateName}") {
+        fun createRoute(stateCode: String, stateName: String) = "district_list/$stateCode/$stateName"
+    }
+    object AreaList : Screen("area_list/{districtCode}/{districtName}") {
+        fun createRoute(districtCode: String, districtName: String) = "area_list/$districtCode/$districtName"
+    }
+    object BusDetail : Screen("bus_detail/{routeNumber}") {
+        fun createRoute(routeNumber: String) = "bus_detail/$routeNumber"
+    }
 }
 
 val bottomNavItems = listOf(
@@ -113,7 +124,11 @@ fun PayanMitraNavGraph(
     languageViewModel: LanguageViewModel,
     areaSelectViewModel: AreaSelectViewModel,
     searchBusViewModel: SearchBusViewModel,
-    busResultsViewModel: BusResultsViewModel
+    busResultsViewModel: BusResultsViewModel,
+    stateListViewModel: com.example.presentation.screens.state.StateListViewModel,
+    districtListViewModel: com.example.presentation.screens.district.DistrictListViewModel,
+    areaListViewModel: com.example.presentation.screens.area.AreaListViewModel,
+    busDetailViewModel: com.example.presentation.screens.busdetail.BusDetailViewModel
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
@@ -200,9 +215,9 @@ fun PayanMitraNavGraph(
             composable(Screen.Explore.route) {
                 ExploreScreen(
                     viewModel = exploreViewModel,
-                    onNavigateToTrack = { routeNo -> navController.navigate(Screen.LiveTracking.createRoute(routeNo)) },
+                    onNavigateToTrack = { routeNo -> navController.navigate(Screen.BusDetail.createRoute(routeNo)) },
                     onNavigateToSOS = { navController.navigate(Screen.SOS.route) },
-                    onNavigateToAreaSelect = { navController.navigate(Screen.AreaSelect.createRoute("TN_DGL")) }
+                    onNavigateToAreaSelect = { navController.navigate(Screen.StateList.route) }
                 )
             }
 
@@ -285,7 +300,73 @@ fun PayanMitraNavGraph(
                     onBackClick = { navController.popBackStack() },
                     onTrackClick = { routeNo -> navController.navigate(Screen.LiveTracking.createRoute(routeNo)) },
                     onBookClick = { routeNo -> navController.navigate(Screen.SeatAvailability.createRoute(routeNo)) },
+                    onDetailClick = { routeNo -> navController.navigate(Screen.BusDetail.createRoute(routeNo)) },
                     onSOSClick = { navController.navigate(Screen.SOS.route) }
+                )
+            }
+
+            composable(Screen.StateList.route) {
+                com.example.presentation.screens.state.StateListScreen(
+                    viewModel = stateListViewModel,
+                    onStateSelected = { code, name ->
+                        navController.navigate(Screen.DistrictList.createRoute(code, name))
+                    }
+                )
+            }
+
+            composable(
+                route = Screen.DistrictList.route,
+                arguments = listOf(
+                    navArgument("stateCode") { type = NavType.StringType },
+                    navArgument("stateName") { type = NavType.StringType }
+                )
+            ) { backStackEntry ->
+                val code = backStackEntry.arguments?.getString("stateCode") ?: "TN"
+                val name = backStackEntry.arguments?.getString("stateName") ?: "Tamil Nadu"
+                com.example.presentation.screens.district.DistrictListScreen(
+                    stateCode = code,
+                    stateName = name,
+                    viewModel = districtListViewModel,
+                    onDistrictSelected = { distCode, distName ->
+                        navController.navigate(Screen.AreaList.createRoute(distCode, distName))
+                    },
+                    onBackClick = { navController.popBackStack() }
+                )
+            }
+
+            composable(
+                route = Screen.AreaList.route,
+                arguments = listOf(
+                    navArgument("districtCode") { type = NavType.StringType },
+                    navArgument("districtName") { type = NavType.StringType }
+                )
+            ) { backStackEntry ->
+                val distCode = backStackEntry.arguments?.getString("districtCode") ?: "TN_DGL"
+                val distName = backStackEntry.arguments?.getString("districtName") ?: "Dindigul"
+                com.example.presentation.screens.area.AreaListScreen(
+                    districtCode = distCode,
+                    districtName = distName,
+                    viewModel = areaListViewModel,
+                    onAreaSelected = { _, areaName ->
+                        homeViewModel.updateSelectedArea(areaName)
+                        navController.navigate(Screen.BusList.createRoute(areaName))
+                    },
+                    onBackClick = { navController.popBackStack() }
+                )
+            }
+
+            composable(
+                route = Screen.BusDetail.route,
+                arguments = listOf(navArgument("routeNumber") { type = NavType.StringType })
+            ) { backStackEntry ->
+                val routeNo = backStackEntry.arguments?.getString("routeNumber") ?: "182"
+                com.example.presentation.screens.busdetail.BusDetailScreen(
+                    routeNumber = routeNo,
+                    viewModel = busDetailViewModel,
+                    onNavigateToSeats = { rNo -> navController.navigate(Screen.SeatAvailability.createRoute(rNo)) },
+                    onNavigateToBooking = { rNo -> navController.navigate(Screen.SeatAvailability.createRoute(rNo)) },
+                    onNavigateToSOS = { navController.navigate(Screen.SOS.route) },
+                    onNavigateBack = { navController.popBackStack() }
                 )
             }
 
