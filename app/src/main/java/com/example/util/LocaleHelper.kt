@@ -1,29 +1,24 @@
 package com.example.util
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Configuration
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import java.util.Locale
 
-private val Context.dataStore by preferencesDataStore(name = "user_prefs")
-
 object LocaleHelper {
-    private val LANGUAGE_KEY = stringPreferencesKey("app_language")
+    private const val PREFS_NAME = "user_prefs"
+    private const val LANGUAGE_KEY = "app_language"
 
-    fun getSavedLanguage(context: Context): Flow<String> {
-        return context.dataStore.data.map { prefs ->
-            prefs[LANGUAGE_KEY] ?: "ta" // Default to Tamil
-        }
+    private fun getPrefs(context: Context): SharedPreferences {
+        return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     }
 
-    suspend fun saveLanguage(context: Context, langCode: String) {
-        context.dataStore.edit { prefs ->
-            prefs[LANGUAGE_KEY] = langCode
-        }
+    fun getSavedLanguage(context: Context): String {
+        return getPrefs(context).getString(LANGUAGE_KEY, "en") ?: "en"
+    }
+
+    fun saveLanguage(context: Context, langCode: String) {
+        getPrefs(context).edit().putString(LANGUAGE_KEY, langCode).apply()
     }
 
     fun applyLocale(context: Context, langCode: String): Context {
