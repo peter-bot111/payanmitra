@@ -1,5 +1,10 @@
 package com.example.presentation.screens.home
 
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,15 +24,17 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ConfirmationNumber
 import androidx.compose.material.icons.filled.DirectionsBus
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.MyLocation
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.PinDrop
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.ConfirmationNumber
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,10 +43,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import com.example.R
 import com.example.presentation.components.BusCard
 import com.example.presentation.components.GlassCard
@@ -60,10 +69,23 @@ fun HomeScreen(
     onNavigateToAreaSelect: () -> Unit,
     onNavigateToSearchBus: () -> Unit = {}
 ) {
+    val context = LocalContext.current
     val greetingKey by viewModel.currentGreeting.collectAsState()
     val selectedState by viewModel.selectedState.collectAsState()
     val areaName by viewModel.selectedAreaName.collectAsState()
     val nearbyBuses by viewModel.nearbyBuses.collectAsState()
+    val isLocating by viewModel.isLocating.collectAsState()
+    val locationStatus by viewModel.locationStatus.collectAsState()
+
+    val permissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val fineGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false
+        val coarseGranted = permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false
+        if (fineGranted || coarseGranted) {
+            viewModel.detectLocationAndSelectArea(context)
+        }
+    }
 
     val greetingText = when (greetingKey) {
         "greeting_morning" -> stringResource(R.string.greeting_morning)
@@ -84,7 +106,7 @@ fun HomeScreen(
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Header Greeting
+            // Header Greeting & GPS Locate Me Button
             item {
                 Column {
                     Text(
@@ -94,25 +116,89 @@ fun HomeScreen(
                         color = TextPrimary
                     )
 
+                    Spacer(modifier = Modifier.height(6.dp))
+
                     Row(
-                        modifier = Modifier
-                            .padding(top = 4.dp)
-                            .clickable { onNavigateToAreaSelect() },
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(
-                            imageVector = Icons.Default.LocationOn,
-                            contentDescription = "Location",
-                            tint = PrimaryBlue,
-                            modifier = Modifier.size(18.dp)
-                        )
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Text(
-                            text = "Location: $areaName (Tamil Nadu) ▾",
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = PrimaryBlue
-                        )
+                        Row(
+                            modifier = Modifier
+                                .weight(1f)
+                                .clickable { onNavigateToAreaSelect() },
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.LocationOn,
+                                contentDescription = "Location",
+                                tint = PrimaryBlue,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(
+                                text = "Location: $areaName (${selectedState?.stateName ?: "India"}) ▾",
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = PrimaryBlue
+                            )
+                        }
+
+                        Button(
+                            onClick = {
+                                val hasFine = ContextCompat.checkSelfPermission(
+                                    context,
+                                    Manifest.permission.ACCESS_FINE_LOCATION
+                                ) == PackageManager.PERMISSION_GRANTED
+                                val hasCoarse = ContextCompat.checkSelfPermission(
+                                    context,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION
+                                ) == PackageManager.PERMISSION_GRANTED
+
+                                if (hasFine || hasCoarse) {
+                                    viewModel.detectLocationAndSelectArea(context)
+                                } else {
+                                    permissionLauncher.launch(
+                                        arrayOf(
+                                            Manifest.permission.ACCESS_FINE_LOCATION,
+                                            Manifest.permission.ACCESS_COARSE_LOCATION
+                                        )
+                                    )
+                                }
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = PrimaryBlue),
+                            shape = RoundedCornerShape(12.dp),
+                            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+                        ) {
+                            if (isLocating) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(16.dp),
+                                    color = Color.White,
+                                    strokeWidth = 2.dp
+                                )
+                            } else {
+                                Icon(
+                                    imageVector = Icons.Default.MyLocation,
+                                    contentDescription = "GPS",
+                                    tint = Color.White,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                            }
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("Locate Me (GPS)", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                        }
+                    }
+
+                    locationStatus?.let { status ->
+                        AnimatedVisibility(visible = status.isNotEmpty()) {
+                            Text(
+                                text = "📍 $status",
+                                fontSize = 12.sp,
+                                color = Color(0xFF047857),
+                                fontWeight = FontWeight.Medium,
+                                modifier = Modifier.padding(top = 4.dp)
+                            )
+                        }
                     }
                 }
             }
