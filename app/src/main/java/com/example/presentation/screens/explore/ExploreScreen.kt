@@ -86,33 +86,14 @@ fun ExploreScreen(
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            // Google Map View
-            GoogleMap(
+            // Map View
+            com.example.presentation.components.OSMMapView(
                 modifier = Modifier.fillMaxSize(),
-                cameraPositionState = cameraPositionState
-            ) {
-                // Bus Stop Markers
-                busStops.forEach { stop ->
-                    Marker(
-                        state = MarkerState(position = LatLng(stop.latitude, stop.longitude)),
-                        title = "🚏 ${stop.stopName}",
-                        snippet = "Tap for schedule",
-                        onClick = {
-                            viewModel.selectStop(stop)
-                            true
-                        }
-                    )
-                }
-
-                // Live Bus Markers
-                liveBuses.forEach { bus ->
-                    Marker(
-                        state = MarkerState(position = LatLng(bus.currentLatitude, bus.currentLongitude)),
-                        title = "🚌 Bus ${bus.busNumber} (Route ${bus.routeNumber})",
-                        snippet = "Speed: ${bus.currentSpeed.toInt()} km/h | Seats: ${bus.availableSeats}"
-                    )
-                }
-            }
+                centerLat = 10.3673,
+                centerLng = 77.9803,
+                zoomLevel = 13.0,
+                busMarkerTitle = "Dindigul Bus Hub"
+            )
 
             // Top Overlay Picker Bar
             Column(

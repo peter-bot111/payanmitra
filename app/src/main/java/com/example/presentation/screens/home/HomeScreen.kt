@@ -57,7 +57,8 @@ fun HomeScreen(
     onNavigateToTrack: (String) -> Unit,
     onNavigateToBooking: (String) -> Unit,
     onNavigateToSOS: () -> Unit,
-    onNavigateToAreaSelect: () -> Unit
+    onNavigateToAreaSelect: () -> Unit,
+    onNavigateToSearchBus: () -> Unit = {}
 ) {
     val greetingKey by viewModel.currentGreeting.collectAsState()
     val selectedState by viewModel.selectedState.collectAsState()
@@ -141,6 +142,59 @@ fun HomeScreen(
                             color = TextSecondary,
                             fontWeight = FontWeight.Medium
                         )
+                    }
+                }
+            }
+
+            // Featured Inter-City Reservation Banner
+            item {
+                GlassCard(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { onNavigateToSearchBus() },
+                    backgroundColor = Color(0xFF1E3A8A),
+                    elevation = 6.dp
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(4.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = "INTER-CITY EXPRESS RESERVATION 🚌",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF93C5FD)
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(
+                                text = "Book SETC & TNSTC Seats Online",
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color.White
+                            )
+                            Text(
+                                text = "AC, Sleeper & Express across all 38 TN Districts",
+                                fontSize = 12.sp,
+                                color = Color(0xFFE0E7FF)
+                            )
+                        }
+
+                        Box(
+                            modifier = Modifier
+                                .background(Color.White, RoundedCornerShape(10.dp))
+                                .padding(horizontal = 12.dp, vertical = 8.dp)
+                        ) {
+                            Text(
+                                text = "BOOK NOW",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = PrimaryBlue
+                            )
+                        }
                     }
                 }
             }

@@ -30,6 +30,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.R
+import com.example.presentation.screens.area.AreaSelectScreen
+import com.example.presentation.screens.area.AreaSelectViewModel
 import com.example.presentation.screens.booking.BookingViewModel
 import com.example.presentation.screens.booking.TicketBookingScreen
 import com.example.presentation.screens.buslist.BusListScreen
@@ -43,6 +45,10 @@ import com.example.presentation.screens.language.LanguageViewModel
 import com.example.presentation.screens.safety.SafetyViewModel
 import com.example.presentation.screens.safety.WomenSafetyScreen
 import com.example.presentation.screens.scanner.PayanLapScannerScreen
+import com.example.presentation.screens.search.BusResultsScreen
+import com.example.presentation.screens.search.BusResultsViewModel
+import com.example.presentation.screens.search.SearchBusScreen
+import com.example.presentation.screens.search.SearchBusViewModel
 import com.example.presentation.screens.seats.SeatAvailabilityScreen
 import com.example.presentation.screens.seats.SeatViewModel
 import com.example.presentation.screens.settings.SettingsScreen
@@ -75,6 +81,14 @@ sealed class Screen(val route: String, val titleRes: Int? = null, val icon: Imag
     }
     object SOS : Screen("sos")
     object PayanLapScanner : Screen("scanner")
+
+    object SearchBus : Screen("search_bus")
+    object BusResults : Screen("bus_results/{fromLoc}/{toLoc}/{dateStr}") {
+        fun createRoute(fromLoc: String, toLoc: String, dateStr: String) = "bus_results/$fromLoc/$toLoc/$dateStr"
+    }
+    object AreaSelect : Screen("area_select/{districtCode}") {
+        fun createRoute(districtCode: String) = "area_select/$districtCode"
+    }
 }
 
 val bottomNavItems = listOf(
@@ -96,7 +110,10 @@ fun PayanMitraNavGraph(
     bookingViewModel: BookingViewModel,
     ticketsViewModel: TicketsViewModel,
     safetyViewModel: SafetyViewModel,
-    languageViewModel: LanguageViewModel
+    languageViewModel: LanguageViewModel,
+    areaSelectViewModel: AreaSelectViewModel,
+    searchBusViewModel: SearchBusViewModel,
+    busResultsViewModel: BusResultsViewModel
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
@@ -175,7 +192,8 @@ fun PayanMitraNavGraph(
                     onNavigateToTrack = { routeNo -> navController.navigate(Screen.LiveTracking.createRoute(routeNo)) },
                     onNavigateToBooking = { routeNo -> navController.navigate(Screen.SeatAvailability.createRoute(routeNo)) },
                     onNavigateToSOS = { navController.navigate(Screen.SOS.route) },
-                    onNavigateToAreaSelect = { navController.navigate(Screen.Explore.route) }
+                    onNavigateToAreaSelect = { navController.navigate(Screen.AreaSelect.createRoute("TN_DGL")) },
+                    onNavigateToSearchBus = { navController.navigate(Screen.SearchBus.route) }
                 )
             }
 
@@ -184,7 +202,7 @@ fun PayanMitraNavGraph(
                     viewModel = exploreViewModel,
                     onNavigateToTrack = { routeNo -> navController.navigate(Screen.LiveTracking.createRoute(routeNo)) },
                     onNavigateToSOS = { navController.navigate(Screen.SOS.route) },
-                    onNavigateToAreaSelect = { }
+                    onNavigateToAreaSelect = { navController.navigate(Screen.AreaSelect.createRoute("TN_DGL")) }
                 )
             }
 
@@ -207,6 +225,52 @@ fun PayanMitraNavGraph(
                     onNavigateToLanguage = { navController.navigate(Screen.Language.route) },
                     onNavigateToPayanLapScanner = { navController.navigate(Screen.PayanLapScanner.route) },
                     onSOSClick = { navController.navigate(Screen.SOS.route) }
+                )
+            }
+
+            composable(Screen.SearchBus.route) {
+                SearchBusScreen(
+                    viewModel = searchBusViewModel,
+                    onSearchClick = { fromLoc, toLoc, dateStr ->
+                        navController.navigate(Screen.BusResults.createRoute(fromLoc, toLoc, dateStr))
+                    },
+                    onBackClick = { navController.popBackStack() }
+                )
+            }
+
+            composable(
+                route = Screen.BusResults.route,
+                arguments = listOf(
+                    navArgument("fromLoc") { type = NavType.StringType },
+                    navArgument("toLoc") { type = NavType.StringType },
+                    navArgument("dateStr") { type = NavType.StringType }
+                )
+            ) { backStackEntry ->
+                val fromLoc = backStackEntry.arguments?.getString("fromLoc") ?: "Chennai Koyambedu"
+                val toLoc = backStackEntry.arguments?.getString("toLoc") ?: "Madurai Mattuthavani"
+                val dateStr = backStackEntry.arguments?.getString("dateStr") ?: "31 Jul 2026"
+                BusResultsScreen(
+                    fromLoc = fromLoc,
+                    toLoc = toLoc,
+                    dateStr = dateStr,
+                    viewModel = busResultsViewModel,
+                    onBookClick = { routeNo -> navController.navigate(Screen.SeatAvailability.createRoute(routeNo)) },
+                    onBackClick = { navController.popBackStack() }
+                )
+            }
+
+            composable(
+                route = Screen.AreaSelect.route,
+                arguments = listOf(navArgument("districtCode") { type = NavType.StringType })
+            ) { backStackEntry ->
+                val districtCode = backStackEntry.arguments?.getString("districtCode") ?: "TN_DGL"
+                AreaSelectScreen(
+                    viewModel = areaSelectViewModel,
+                    onAreaSelected = { selectedArea ->
+                        homeViewModel.updateSelectedArea(selectedArea)
+                        navController.popBackStack()
+                    },
+                    onBackClick = { navController.popBackStack() }
                 )
             }
 

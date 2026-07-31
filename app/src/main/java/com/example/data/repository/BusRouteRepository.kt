@@ -18,6 +18,12 @@ class BusRouteRepository(
     suspend fun getRouteByNumber(routeNumber: String): BusRouteEntity? =
         busRouteDao.getRouteByNumber(routeNumber)
 
+    suspend fun getInterCityRoutes(fromCode: String, toCode: String): List<BusRouteEntity> =
+        busRouteDao.getInterCityRoutes(fromCode, toCode)
+
+    suspend fun getAllBookableRoutes(): List<BusRouteEntity> =
+        busRouteDao.getAllBookableRoutes()
+
     fun getStopsForArea(areaCode: String): Flow<List<BusStopEntity>> =
         busStopDao.getStopsForArea(areaCode)
 

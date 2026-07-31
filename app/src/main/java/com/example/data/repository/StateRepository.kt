@@ -25,6 +25,10 @@ class StateRepository(
     fun getAreasForDistrict(districtCode: String): Flow<List<AreaEntity>> =
         areaDao.getAreasByDistrict(districtCode)
 
+    fun getAllAreas(): Flow<List<AreaEntity>> = areaDao.getAllAreas()
+
+    suspend fun getAreaByName(name: String): AreaEntity? = areaDao.getAreaByName(name)
+
     suspend fun getAreaByCode(areaCode: String): AreaEntity? = areaDao.getAreaByCode(areaCode)
 
     fun searchAreas(query: String): Flow<List<AreaEntity>> = areaDao.searchAreas(query)

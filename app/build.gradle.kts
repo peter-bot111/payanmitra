@@ -104,6 +104,7 @@ dependencies {
   implementation(libs.play.services.location)
   implementation(libs.play.services.maps)
   implementation(libs.maps.compose)
+  implementation("org.osmdroid:osmdroid-android:6.1.20")
   implementation(libs.zxing.core)
   implementation(libs.retrofit)
   testImplementation(libs.androidx.compose.ui.test.junit4)

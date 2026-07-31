@@ -75,13 +75,19 @@ fun TicketBookingScreen(
     val currentStep by viewModel.currentStep.collectAsState()
     val passengerName by viewModel.passengerName.collectAsState()
     val passengerPhone by viewModel.passengerPhone.collectAsState()
-    val fromArea by viewModel.fromArea.collectAsState()
-    val toArea by viewModel.toArea.collectAsState()
+    val selectedRoute by viewModel.selectedRoute.collectAsState()
     val passengerCount by viewModel.passengerCount.collectAsState()
+    val isSeniorCitizen by viewModel.isSeniorCitizen.collectAsState()
+    val isDivyang by viewModel.isDivyang.collectAsState()
+    val calculatedFare by viewModel.calculatedFare.collectAsState()
     val generatedTicket by viewModel.generatedTicket.collectAsState()
 
-    var isSeniorCitizen by remember { mutableStateOf(false) }
-    var isDivyang by remember { mutableStateOf(false) }
+    androidx.compose.runtime.LaunchedEffect(routeNumber) {
+        viewModel.loadRoute(routeNumber)
+    }
+
+    val fromArea = selectedRoute?.sourceArea ?: "Dindigul Central"
+    val toArea = selectedRoute?.destinationArea ?: "Palani"
 
     Scaffold(
         containerColor = SoftBlueBackground,
@@ -208,17 +214,17 @@ fun TicketBookingScreen(
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Checkbox(
                                     checked = isSeniorCitizen,
-                                    onCheckedChange = { isSeniorCitizen = it }
+                                    onCheckedChange = { viewModel.setSeniorCitizen(it) }
                                 )
-                                Text("Senior Citizen Concession", fontSize = 13.sp)
+                                Text("Senior Citizen Concession (25% off)", fontSize = 13.sp)
                             }
 
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Checkbox(
                                     checked = isDivyang,
-                                    onCheckedChange = { isDivyang = it }
+                                    onCheckedChange = { viewModel.setDivyang(it) }
                                 )
-                                Text("Divyang Passenger Concession", fontSize = 13.sp)
+                                Text("Divyang Passenger Concession (50% off)", fontSize = 13.sp)
                             }
                         }
                     }
@@ -252,7 +258,7 @@ fun TicketBookingScreen(
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
                                 Text("Route $routeNumber ($fromArea → $toArea)")
-                                Text("₹${45 * passengerCount}")
+                                Text("₹${calculatedFare.toInt()}")
                             }
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
@@ -274,7 +280,7 @@ fun TicketBookingScreen(
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
                                 Text("Total Fare", fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                                Text("₹${45 * passengerCount}.00", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp, color = PrimaryBlue)
+                                Text("₹${calculatedFare.toInt()}.00", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp, color = PrimaryBlue)
                             }
                         }
                     }
@@ -286,7 +292,7 @@ fun TicketBookingScreen(
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text("Scan UPI QR Code to Pay", fontWeight = FontWeight.Bold, fontSize = 14.sp)
                             Spacer(modifier = Modifier.height(12.dp))
-                            val qrBitmap = QRCodeGenerator.generateQRCode("upi://pay?pa=tnstc@sbi&pn=TNSTC&am=${45*passengerCount}&cu=INR")
+                            val qrBitmap = QRCodeGenerator.generateQRCode("upi://pay?pa=payanmitra@sbi&pn=PayanMitra&am=${calculatedFare.toInt()}&cu=INR")
                             qrBitmap?.let {
                                 Image(
                                     bitmap = it.asImageBitmap(),

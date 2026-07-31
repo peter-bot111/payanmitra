@@ -29,7 +29,7 @@ import com.example.data.local.entities.TicketEntity
         LiveBusEntity::class,
         TicketEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class PayanMitraDatabase : RoomDatabase() {
@@ -51,7 +51,9 @@ abstract class PayanMitraDatabase : RoomDatabase() {
                     context.applicationContext,
                     PayanMitraDatabase::class.java,
                     "payanmitra_db"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }

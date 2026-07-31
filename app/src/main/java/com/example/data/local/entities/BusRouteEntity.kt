@@ -18,5 +18,9 @@ data class BusRouteEntity(
     val operatingDays: String,          // "MON-SUN", "MON-SAT"
     val firstBusTime: String,           // "05:30"
     val lastBusTime: String,            // "22:45"
-    val viaStops: String                // Comma-separated or JSON list of stop names
+    val viaStops: String,               // Comma-separated or JSON list of stop names
+    val isBookable: Boolean = false,    // true = inter-city reserved, false = local
+    val isACBus: Boolean = false,
+    val isSleeper: Boolean = false,
+    val totalSeats: Int = 36
 )

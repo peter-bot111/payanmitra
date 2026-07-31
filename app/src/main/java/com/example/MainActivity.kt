@@ -52,10 +52,13 @@ class MainActivity : ComponentActivity() {
         val busListViewModel = BusListViewModel(busRouteRepository)
         val liveTrackingViewModel = LiveTrackingViewModel(liveBusRepository, busRouteRepository)
         val seatViewModel = SeatViewModel()
-        val bookingViewModel = BookingViewModel(ticketRepository)
+        val bookingViewModel = BookingViewModel(ticketRepository, busRouteRepository)
         val ticketsViewModel = TicketsViewModel(ticketRepository)
         val safetyViewModel = SafetyViewModel()
         val languageViewModel = LanguageViewModel()
+        val areaSelectViewModel = com.example.presentation.screens.area.AreaSelectViewModel(stateRepository)
+        val searchBusViewModel = com.example.presentation.screens.search.SearchBusViewModel(stateRepository)
+        val busResultsViewModel = com.example.presentation.screens.search.BusResultsViewModel(busRouteRepository)
 
         setContent {
             PayanMitraTheme {
@@ -68,7 +71,10 @@ class MainActivity : ComponentActivity() {
                     bookingViewModel = bookingViewModel,
                     ticketsViewModel = ticketsViewModel,
                     safetyViewModel = safetyViewModel,
-                    languageViewModel = languageViewModel
+                    languageViewModel = languageViewModel,
+                    areaSelectViewModel = areaSelectViewModel,
+                    searchBusViewModel = searchBusViewModel,
+                    busResultsViewModel = busResultsViewModel
                 )
             }
         }

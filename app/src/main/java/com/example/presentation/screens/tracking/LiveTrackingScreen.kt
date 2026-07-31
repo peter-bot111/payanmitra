@@ -210,29 +210,13 @@ fun LiveTrackingScreen(
                     .padding(innerPadding)
             ) {
                 // Map View
-                GoogleMap(
+                com.example.presentation.components.OSMMapView(
                     modifier = Modifier.fillMaxSize(),
-                    cameraPositionState = cameraPositionState
-                ) {
-                    // Live Bus Marker
-                    Marker(
-                        state = MarkerState(position = busPos),
-                        title = "🚌 Bus ${liveBus?.busNumber ?: ""}",
-                        snippet = "Driver: ${liveBus?.driverName ?: ""}"
-                    )
-
-                    // Polyline for route
-                    Polyline(
-                        points = listOf(
-                            LatLng(10.3673, 77.9803),
-                            LatLng(10.4167, 77.9167),
-                            LatLng(10.4833, 77.7500),
-                            LatLng(10.4500, 77.5200)
-                        ),
-                        color = PrimaryBlue,
-                        width = 8f
-                    )
-                }
+                    centerLat = liveBus?.currentLatitude ?: 10.3673,
+                    centerLng = liveBus?.currentLongitude ?: 77.9803,
+                    zoomLevel = 14.0,
+                    busMarkerTitle = "🚌 Bus ${liveBus?.busNumber ?: "TN 57 N 2184"}"
+                )
 
                 // Top Bus Info & Speedometer Card
                 GlassCard(
