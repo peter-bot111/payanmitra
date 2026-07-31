@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PayanMitra</string>
+    <string name="app_tagline">Smart Public Bus Companion</string>
+    <string name="select_language">Select Your Language</string>
+    <string name="select_language_sub">மொழி தேர்வு / भाषा चुनें</string>
+    <string name="lang_english">English</string>
+    <string name="lang_tamil">தமிழ் (Tamil)</string>
+    <string name="lang_hindi">हिन्दी (Hindi)</string>
+    <string name="continue_btn">Continue →</string>
+    
+    <!-- Navigation Tabs -->
+    <string name="nav_home">Home</string>
+    <string name="nav_explore">Explore</string>
+    <string name="nav_tickets">Tickets</string>
+    <string name="nav_safety">Safety</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Selection Headers -->
+    <string name="select_state">Select State</string>
+    <string name="select_district">Select District</string>
+    <string name="select_area">Select Area</string>
+    <string name="search_state">Search State...</string>
+    <string name="search_district">Search District...</string>
+    <string name="search_area">Search Area...</string>
+
+    <!-- Home Screen -->
+    <string name="greeting_morning">Good Morning! 🚌</string>
+    <string name="greeting_afternoon">Good Afternoon! 🚌</string>
+    <string name="greeting_evening">Good Evening! 🚌</string>
+    <string name="search_bus">Where are you going?</string>
+    <string name="quick_actions">QUICK ACTIONS</string>
+    <string name="action_find_bus">Find Bus</string>
+    <string name="action_nearby_stops">Nearby Stops</string>
+    <string name="action_book_ticket">Book Ticket</string>
+    <string name="action_helpline">Helpline</string>
+    <string name="nearby_buses">NEARBY BUSES</string>
+    <string name="your_state_corp">YOUR STATE CORPORATION</string>
+    <string name="eta_minutes">In %d mins</string>
+
+    <!-- Bus List & Details -->
+    <string name="buses_in">Buses in %s</string>
+    <string name="seats_available">%d seats available</string>
+    <string name="no_seat">No seat available</string>
+    <string name="seat_available">Seat Available</string>
+    <string name="track_bus">Track Bus 📍</string>
+    <string name="book_ticket">Book Ticket 🎫</string>
+    <string name="live_tracking">Live Tracking</string>
+    <string name="running_now">Running Now</string>
+    <string name="all_buses">All Buses</string>
+    <string name="filter_express">Express</string>
+    <string name="filter_ordinary">Ordinary</string>
+    <string name="filter_ladies">Ladies Special</string>
+
+    <!-- Live Tracking -->
+    <string name="current_speed">Speed: %.0f km/h</string>
+    <string name="ais_140_notice">Live data via AIS-140 GPS System</string>
+    <string name="report_issue">🚨 Report Issue</string>
+    <string name="upcoming_stops">Upcoming Stops</string>
+
+    <!-- Seat Layout -->
+    <string name="seat_layout">Seat Layout</string>
+    <string name="driver_seat">DRIVER</string>
+    <string name="women_reserved">Reserved for Women</string>
+    <string name="senior_reserved">Reserved for Senior Citizens</string>
+    <string name="proceed_to_book">Proceed to Book</string>
+
+    <!-- Ticket Booking (ETMS) -->
+    <string name="passenger_info">Passenger Info</string>
+    <string name="payment">Payment</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="pnr_number">PNR: %s</string>
+    <string name="ncmc_info">Use your One Nation One Card for quick payment</string>
+    <string name="download_pdf">Download PDF</string>
+    <string name="share_whatsapp">Share on WhatsApp</string>
+    <string name="share_sms">Share by SMS</string>
+
+    <!-- My Tickets -->
+    <string name="tab_upcoming">Upcoming</string>
+    <string name="tab_completed">Completed</string>
+    <string name="tab_cancelled">Cancelled</string>
+    <string name="cancel_ticket">Cancel Ticket</string>
+    <string name="confirmed">CONFIRMED</string>
+
+    <!-- Women Safety -->
+    <string name="women_safety">Women Safety</string>
+    <string name="women_safety_hub">Women Safety Hub</string>
+    <string name="night_mode">Night Safety Mode</string>
+    <string name="sos_alert">SOS Emergency</string>
+    <string name="share_journey">Share My Journey</string>
+    <string name="set_night_alert">Set Night Alert</string>
+    <string name="trusted_contacts">Trusted Contacts</string>
+    <string name="police_112">112 Police</string>
+    <string name="women_helpline_1091">1091 Women Helpline</string>
+    <string name="emergency_100">100 Emergency</string>
+    <string name="sos_sending_in">SOS will be sent in %d...</string>
+    <string name="cancel_sos">CANCEL SOS</string>
+
+    <!-- Settings -->
+    <string name="profile">Profile</string>
+    <string name="notifications">Notifications</string>
+    <string name="bus_delay_alerts">Bus Delay Alerts</string>
+    <string name="seat_alerts">Seat Availability Alerts</string>
+    <string name="journey_reminders">Journey Reminders</string>
+    <string name="default_route">Default Route</string>
+    <string name="sms_ussd_help">SMS &amp; USSD Helper</string>
+    <string name="payanlap_integration">PayanLap Scanner (KrishiMitra)</string>
+    <string name="helpline_numbers">Corporation Helplines</string>
+    <string name="about_app">About PayanMitra</string>
+    <string name="app_version">Version 1.0.0</string>
+</resources>

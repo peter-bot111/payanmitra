@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">பயண மித்ரா</string>
+    <string name="app_tagline">அரசு பஸ் பயணக் தோழன்</string>
+    <string name="select_language">மொழி தேர்வு செய்க</string>
+    <string name="select_language_sub">Select Your Language / भाषा चुनें</string>
+    <string name="lang_english">English</string>
+    <string name="lang_tamil">தமிழ் (Tamil)</string>
+    <string name="lang_hindi">हिन्दी (Hindi)</string>
+    <string name="continue_btn">தொடர்க →</string>
+    
+    <!-- Navigation Tabs -->
+    <string name="nav_home">முகப்பு</string>
+    <string name="nav_explore">ஆராய்க</string>
+    <string name="nav_tickets">டிக்கெட்டுகள்</string>
+    <string name="nav_safety">பாதுகாப்பு</string>
+    <string name="nav_settings">அமைப்புகள்</string>
+
+    <!-- Selection Headers -->
+    <string name="select_state">மாநிலம் தேர்வு செய்க</string>
+    <string name="select_district">மாவட்டம் தேர்வு செய்க</string>
+    <string name="select_area">பகுதி தேர்வு செய்க</string>
+    <string name="search_state">மாநிலம் தேடுக...</string>
+    <string name="search_district">மாவட்டம் தேடுக...</string>
+    <string name="search_area">பகுதி தேடுக...</string>
+
+    <!-- Home Screen -->
+    <string name="greeting_morning">காலை வணக்கம்! 🚌</string>
+    <string name="greeting_afternoon">மதிய வணக்கம்! 🚌</string>
+    <string name="greeting_evening">மாலை வணக்கம்! 🚌</string>
+    <string name="search_bus">எங்கு செல்ல வேண்டும்?</string>
+    <string name="quick_actions">விரைவு சேவைகள்</string>
+    <string name="action_find_bus">பஸ் தேடுக</string>
+    <string name="action_nearby_stops">அருகிலுள்ள நிறுத்தம்</string>
+    <string name="action_book_ticket">டிக்கெட் முன்பதிவு</string>
+    <string name="action_helpline">உதவி எண்</string>
+    <string name="nearby_buses">அருகிலுள்ள பஸ்கள்</string>
+    <string name="your_state_corp">உங்கள் அரசு போக்குவரத்து</string>
+    <string name="eta_minutes">%d நிமிடங்களில்</string>
+
+    <!-- Bus List & Details -->
+    <string name="buses_in">%s பஸ்கள்</string>
+    <string name="seats_available">%d இடங்கள் உள்ளன</string>
+    <string name="no_seat">இடம் இல்லை</string>
+    <string name="seat_available">இடம் உள்ளது</string>
+    <string name="track_bus">பஸ் கண்காணி 📍</string>
+    <string name="book_ticket">டிக்கெட் முன்பதிவு 🎫</string>
+    <string name="live_tracking">நேரடி கண்காணிப்பு</string>
+    <string name="running_now">தற்போது இயங்குபவை</string>
+    <string name="all_buses">அனைத்து பஸ்கள்</string>
+    <string name="filter_express">எக்ஸ்பிரஸ்</string>
+    <string name="filter_ordinary">சாதாரண பஸ்</string>
+    <string name="filter_ladies">பெண்கள் சிறப்பு</string>
+
+    <!-- Live Tracking -->
+    <string name="current_speed">வேகம்: %.0f கி.மீ/மணி</string>
+    <string name="ais_140_notice">AIS-140 ஜிபிஎஸ் நேரலை தகவல்</string>
+    <string name="report_issue">🚨 புகார் அளிக்க</string>
+    <string name="upcoming_stops">அடுத்த நிறுத்தங்கள்</string>
+
+    <!-- Seat Layout -->
+    <string name="seat_layout">இருக்கை அமைப்பு</string>
+    <string name="driver_seat">ஓட்டுநர்</string>
+    <string name="women_reserved">பெண்கள் ஒதுக்கீடு</string>
+    <string name="senior_reserved">முதியோர் ஒதுக்கீடு</string>
+    <string name="proceed_to_book">முன்பதிவு செய்ய</string>
+
+    <!-- Ticket Booking (ETMS) -->
+    <string name="passenger_info">பயணி விவரம்</string>
+    <string name="payment">கட்டணம் செலுத்துதல்</string>
+    <string name="confirmation">உறுதிப்படுத்தல்</string>
+    <string name="pnr_number">PNR: %s</string>
+    <string name="ncmc_info">ஒருமை பயண அட்டையை பயன்படுத்துங்கள்</string>
+    <string name="download_pdf">PDF பதிவிறக்கம்</string>
+    <string name="share_whatsapp">வாட்ஸ்அப்பில் பகிர்க</string>
+    <string name="share_sms">SMS மூலம் பகிர்க</string>
+
+    <!-- My Tickets -->
+    <string name="tab_upcoming">வரவிருப்பவை</string>
+    <string name="tab_completed">முடிந்தவை</string>
+    <string name="tab_cancelled">ரத்து செய்யப்பட்டவை</string>
+    <string name="cancel_ticket">டிக்கெட் ரத்து</string>
+    <string name="confirmed">உறுதியானது</string>
+
+    <!-- Women Safety -->
+    <string name="women_safety">பெண்கள் பாதுகாப்பு</string>
+    <string name="women_safety_hub">பெண்கள் பாதுகாப்பு மையம்</string>
+    <string name="night_mode">இரவு நேர பாதுகாப்பு</string>
+    <string name="sos_alert">அவசர உதவி SOS</string>
+    <string name="share_journey">பயணத்தை பகிர்க</string>
+    <string name="set_night_alert">இரவு விழிப்பூட்டல்</string>
+    <string name="trusted_contacts">நம்பகமான தொடர்புகள்</string>
+    <string name="police_112">112 காவல்துறை</string>
+    <string name="women_helpline_1091">1091 பெண்கள் உதவி</string>
+    <string name="emergency_100">100 அவசர எண்</string>
+    <string name="sos_sending_in">%d வினாடிகளில் SOS அனுப்பப்படும்...</string>
+    <string name="cancel_sos">SOS ரத்து செய்</string>
+
+    <!-- Settings -->
+    <string name="profile">சுயவிவரம்</string>
+    <string name="notifications">அறிவிப்புகள்</string>
+    <string name="bus_delay_alerts">பஸ் தாமத அறிவிப்பு</string>
+    <string name="seat_alerts">இருக்கை விழிப்பூட்டல்</string>
+    <string name="journey_reminders">பயண நினைவூட்டல்</string>
+    <string name="default_route">வழக்கமான பாதை</string>
+    <string name="sms_ussd_help">SMS &amp; USSD உதவி</string>
+    <string name="payanlap_integration">பயன்லேப் ஸ்கேனர் (கிருஷிமித்ரா)</string>
+    <string name="helpline_numbers">போக்குவரத்து உதவி எண்கள்</string>
+    <string name="about_app">செயலி பற்றி</string>
+    <string name="app_version">பதிப்பு 1.0.0</string>
+</resources>

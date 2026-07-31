@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">पयन मित्रा</string>
+    <string name="app_tagline">सरकारी बस यात्रा साथी</string>
+    <string name="select_language">भाषा चुनें</string>
+    <string name="select_language_sub">Select Your Language / மொழி தேர்வு</string>
+    <string name="lang_english">English</string>
+    <string name="lang_tamil">தமிழ் (Tamil)</string>
+    <string name="lang_hindi">हिन्दी (Hindi)</string>
+    <string name="continue_btn">आगे बढ़ें →</string>
+    
+    <!-- Navigation Tabs -->
+    <string name="nav_home">होम</string>
+    <string name="nav_explore">एक्सप्लोर</string>
+    <string name="nav_tickets">टिकट</string>
+    <string name="nav_safety">सुरक्षा</string>
+    <string name="nav_settings">सेटिंग्स</string>
+
+    <!-- Selection Headers -->
+    <string name="select_state">राज्य चुनें</string>
+    <string name="select_district">जिला चुनें</string>
+    <string name="select_area">क्षेत्र चुनें</string>
+    <string name="search_state">राज्य खोजें...</string>
+    <string name="search_district">जिला खोजें...</string>
+    <string name="search_area">क्षेत्र खोजें...</string>
+
+    <!-- Home Screen -->
+    <string name="greeting_morning">सुप्रभात! 🚌</string>
+    <string name="greeting_afternoon">नमस्कार! 🚌</string>
+    <string name="greeting_evening">शुभ संध्या! 🚌</string>
+    <string name="search_bus">आप कहाँ जाना चाहते हैं?</string>
+    <string name="quick_actions">त्वरित सेवाएं</string>
+    <string name="action_find_bus">बस खोजें</string>
+    <string name="action_nearby_stops">पास के स्टॉप</string>
+    <string name="action_book_ticket">टिकट बुक करें</string>
+    <string name="action_helpline">हेल्पलाइन</string>
+    <string name="nearby_buses">पास की बसें</string>
+    <string name="your_state_corp">आपका राज्य परिवहन</string>
+    <string name="eta_minutes">%d मिनट में</string>
+
+    <!-- Bus List & Details -->
+    <string name="buses_in">%s में बसें</string>
+    <string name="seats_available">%d सीटें उपलब्ध</string>
+    <string name="no_seat">सीट उपलब्ध नहीं</string>
+    <string name="seat_available">सीट उपलब्ध</string>
+    <string name="track_bus">बस ट्रैक करें 📍</string>
+    <string name="book_ticket">टिकट बुक करें 🎫</string>
+    <string name="live_tracking">लाइव ट्रैकिंग</string>
+    <string name="running_now">अभी चालू</string>
+    <string name="all_buses">सभी बसें</string>
+    <string name="filter_express">एक्सप्रेस</string>
+    <string name="filter_ordinary">साधारण</string>
+    <string name="filter_ladies">महिला विशेष</string>
+
+    <!-- Live Tracking -->
+    <string name="current_speed">गति: %.0f किमी/घंटा</string>
+    <string name="ais_140_notice">AIS-140 जीपीएस द्वारा लाइव डेटा</string>
+    <string name="report_issue">🚨 शिकायत दर्ज करें</string>
+    <string name="upcoming_stops">अगले स्टॉप</string>
+
+    <!-- Seat Layout -->
+    <string name="seat_layout">सीट लेआउट</string>
+    <string name="driver_seat">चालक</string>
+    <string name="women_reserved">महिलाओं के लिए आरक्षित</string>
+    <string name="senior_reserved">वरिष्ठ नागरिकों के लिए</string>
+    <string name="proceed_to_book">बुकिंग जारी रखें</string>
+
+    <!-- Ticket Booking (ETMS) -->
+    <string name="passenger_info">यात्री जानकारी</string>
+    <string name="payment">भुगतान</string>
+    <string name="confirmation">पुष्टि</string>
+    <string name="pnr_number">PNR: %s</string>
+    <string name="ncmc_info">त्वरित भुगतान के लिए एनसीएमसी कार्ड का उपयोग करें</string>
+    <string name="download_pdf">पीडीएफ डाउनलोड</string>
+    <string name="share_whatsapp">व्हाट्सएप पर शेयर करें</string>
+    <string name="share_sms">एसएमएस द्वारा शेयर करें</string>
+
+    <!-- My Tickets -->
+    <string name="tab_upcoming">आगामी</string>
+    <string name="tab_completed">पूर्ण</string>
+    <string name="tab_cancelled">रद्द</string>
+    <string name="cancel_ticket">टिकट रद्द करें</string>
+    <string name="confirmed">पुष्टीकृत</string>
+
+    <!-- Women Safety -->
+    <string name="women_safety">महिला सुरक्षा</string>
+    <string name="women_safety_hub">महिला सुरक्षा हब</string>
+    <string name="night_mode">नाइट सुरक्षा मोड</string>
+    <string name="sos_alert">आपातकालीन SOS</string>
+    <string name="share_journey">अपनी यात्रा शेयर करें</string>
+    <string name="set_night_alert">नाइट अलर्ट सेट करें</string>
+    <string name="trusted_contacts">विश्वसनीय संपर्क</string>
+    <string name="police_112">112 पुलिस</string>
+    <string name="women_helpline_1091">1091 महिला हेल्पलाइन</string>
+    <string name="emergency_100">100 आपातकालीन</string>
+    <string name="sos_sending_in">%d सेकंड में SOS भेजा जाएगा...</string>
+    <string name="cancel_sos">SOS रद्द करें</string>
+
+    <!-- Settings -->
+    <string name="profile">प्रोफाइल</string>
+    <string name="notifications">सूचनाएं</string>
+    <string name="bus_delay_alerts">बस देरी अलर्ट</string>
+    <string name="seat_alerts">सीट उपलब्धता अलर्ट</string>
+    <string name="journey_reminders">यात्रा रिमाइंडर</string>
+    <string name="default_route">डिफ़ॉल्ट रूट</string>
+    <string name="sms_ussd_help">एसएमएस और USSD सहायता</string>
+    <string name="payanlap_integration">पयनलैप स्कैनर (कृषि मित्रा)</string>
+    <string name="helpline_numbers">परिवहन हेल्पलाइन</string>
+    <string name="about_app">ऐप के बारे में</string>
+    <string name="app_version">संस्करण 1.0.0</string>
+</resources>

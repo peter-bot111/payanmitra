@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Bus Icon Foreground centered inside 66dp area -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M38,30C35.79,30 34,31.79 34,34V66C34,68.21 35.79,70 38,70V74C38,75.66 39.34,77 41,77H43C44.66,77 46,75.66 46,74V70H62V74C62,75.66 63.34,77 65,77H67C68.66,77 70,75.66 70,74V70C72.21,70 74,68.21 74,66V34C74,31.79 72.21,30 70,30H38ZM41,63C39.34,63 38,61.66 38,60C38,58.34 39.34,57 41,57C42.66,57 44,58.34 44,60C44,61.66 42.66,63 41,63ZM67,63C65.34,63 64,61.66 64,60C64,58.34 65.34,57 67,57C68.66,57 70,58.34 70,60C70,61.66 68.66,63 67,63ZM70,50H38V36H70V50Z"/>
+</vector>
